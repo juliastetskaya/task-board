@@ -1,10 +1,10 @@
-import { Header } from "../features/header";
+import { Header } from "@/features/header";
 
 export function App() {
-  return (
-    <>
-      <Header />
-      <div>App</div>
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <div>App</div>
+        </>
+    );
 }
