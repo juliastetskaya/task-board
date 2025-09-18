@@ -11,6 +11,7 @@ import { Input } from "@/shared/ui/kit/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegister } from "../model/use-register";
 
 const registerSchema = z
     .object({
@@ -38,7 +39,9 @@ export function RegisterForm() {
         resolver: zodResolver(registerSchema),
     });
 
-    const onSubmit = form.handleSubmit((data) => console.log(data));
+    const { errorMessage, register, isPending } = useRegister();
+
+    const onSubmit = form.handleSubmit(register);
 
     return (
         <Form {...form}>
@@ -93,7 +96,10 @@ export function RegisterForm() {
                         </FormItem>
                     )}
                 />
-                <Button>Register</Button>
+                {errorMessage && (
+                    <p className="text-destructive text-sm">{errorMessage}</p>
+                )}
+                <Button disabled={isPending}>Register</Button>
             </form>
         </Form>
     );
